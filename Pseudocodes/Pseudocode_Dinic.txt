@@ -1,0 +1,35 @@
+function DINIC(G, s, t):
+    max_flow ← 0
+    while BFS_level_graph(G, s, t) = True do
+        next_edge[u] ← 0 for all u ∈ V     # keep track of explored edges
+        while flow := DFS_blocking_flow(G, s, t, ∞, next_edge) > 0 do
+            max_flow ← max_flow + flow
+    return max_flow
+
+
+function BFS_level_graph(G, s, t):
+    for u ∈ V: level[u] ← -1
+    level[s] ← 0
+    Q ← queue()
+    enqueue(Q, s)
+    while Q not empty:
+        u ← dequeue(Q)
+        for each edge (u, v) with residual capacity > 0:
+            if level[v] = -1:
+                level[v] ← level[u] + 1
+                enqueue(Q, v)
+    return (level[t] ≠ -1)
+
+
+function DFS_blocking_flow(G, u, t, f, next_edge):
+    if u = t: return f
+    for i from next_edge[u] to degree(u) - 1:
+        next_edge[u] ← i
+        v ← adjacency_list[u][i]
+        if level[v] = level[u] + 1 and residual(u,v) > 0:
+            pushed ← DFS_blocking_flow(G, v, t, min(f, residual(u,v)), next_edge)
+            if pushed > 0:
+                residual(u,v) ← residual(u,v) - pushed
+                residual(v,u) ← residual(v,u) + pushed
+                return pushed
+    return 0
