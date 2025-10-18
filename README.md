@@ -64,5 +64,3 @@ Also, you can go through the datasets we have used, and view the interactive out
 ## Authors
 - [_Aritrabha Majumdar_](https://paulpseudoman.github.io) (BMAT2311)
 - [_Aanchal Saraf_](https://github.com/aanchal-0303) (BMAT2301)
-
-Aanchal has put a lot of efforts a lot of efforts converting the highway data of India in a *comma separated value* format. And she has provided and compiled all the other available datasets...***Kudos!!!***
