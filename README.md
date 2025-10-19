@@ -13,7 +13,7 @@ A simulator for **network flow** problems using the **Ford–Fulkerson algorithm
 - [Overview](#overview)
 - [Features](#features)
 - [Getting Started](#getting-started)
-- [Authors (and Hardships)](#authors)
+- [Authors](#authors)
 
 ---
 
