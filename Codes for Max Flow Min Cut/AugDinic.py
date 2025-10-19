@@ -8,7 +8,7 @@ class DinicMaxFlow:
         self.original_capacity = defaultdict(lambda: defaultdict(int))
 
     def add_edge(self, u, v, cap):
-        """Add directed edge u->v with given capacity"""
+        # Add directed edge u->v with given capacity
         self.graph[u].append(v)
         self.graph[v].append(u)   # reverse edge
         self.capacity[u][v] += cap
@@ -17,7 +17,7 @@ class DinicMaxFlow:
         self.original_capacity[v][u] += 0
 
     def _bfs_level(self, s, t, level):
-        """Construct level graph using BFS"""
+        # Construct level graph using BFS
         for i in range(self.n):
             level[i] = -1
         level[s] = 0
@@ -31,7 +31,7 @@ class DinicMaxFlow:
         return level[t] >= 0
 
     def _dfs_flow(self, u, t, flow, level, next_iter):
-        """DFS to send blocking flow"""
+        # DFS to send blocking flow
         if u == t:
             return flow
         while next_iter[u] < len(self.graph[u]):
@@ -47,7 +47,7 @@ class DinicMaxFlow:
         return 0
 
     def dinic(self, s, t):
-        """Compute max flow using Dinic's algorithm"""
+        # Compute max flow using Dinic's algorithm
         max_flow = 0
         level = [-1] * self.n
 
@@ -62,7 +62,7 @@ class DinicMaxFlow:
         return max_flow
 
     def _dfs_residual(self, s, visited):
-        """DFS on residual graph to find reachable vertices"""
+        # DFS on residual graph to find reachable vertices
         stack = [s]
         visited[s] = True
         while stack:
@@ -73,7 +73,7 @@ class DinicMaxFlow:
                     stack.append(v)
 
     def min_cut(self, s):
-        """Find nodes reachable from s in residual graph and compute cut edges"""
+        # Find nodes reachable from s in residual graph and compute cut edges
         visited = [False] * self.n
         self._dfs_residual(s, visited)
 

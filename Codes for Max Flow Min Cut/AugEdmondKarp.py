@@ -7,7 +7,7 @@ class MaxFlowEK:
         self.original_graph = defaultdict(dict)
 
     def add_edge(self, u, v, capacity):
-        """Add directed edge u->v with given capacity"""
+        # Add directed edge u->v with given capacity
         if v in self.graph[u]:
             self.graph[u][v] += capacity
             self.original_graph[u][v] += capacity
@@ -20,7 +20,7 @@ class MaxFlowEK:
             self.original_graph[v][u] = 0
 
     def _bfs(self, s, t, parent):
-        """BFS to find augmenting path"""
+        # BFS to find augmenting path
         visited = [False] * self.n
         queue = deque([s])
         visited[s] = True
@@ -62,7 +62,7 @@ class MaxFlowEK:
         return max_flow
 
     def _dfs_residual(self, s, visited):
-        """DFS on residual graph to find reachable vertices"""
+        # DFS on residual graph to find reachable vertices
         stack = [s]
         visited[s] = True
         while stack:
@@ -73,7 +73,7 @@ class MaxFlowEK:
                     stack.append(v)
 
     def min_cut(self, s):
-        """Find nodes reachable from s in residual graph and compute cut edges"""
+        # Find nodes reachable from s in residual graph and compute cut edges
         visited = [False] * self.n
         self._dfs_residual(s, visited)
 

@@ -6,7 +6,7 @@ class MaxFlow:
         self.original_graph = defaultdict(dict)
         self.edges = []
     def add_edge(self, u, v, capacity):
-        """Add edge to graph (directed)"""
+        # Add edge to graph (directed)
         if v in self.graph[u]:
             self.graph[u][v] += capacity  # handle multiple edges
             self.original_graph[u][v] += capacity
@@ -19,7 +19,7 @@ class MaxFlow:
             self.original_graph[v][u] = 0
 
     def _dfs(self, s, t, visited, parent):
-        """DFS to find augmenting path"""
+        # DFS to find augmenting path
         stack = [s]
         visited[s] = True
         while stack:
@@ -63,7 +63,7 @@ class MaxFlow:
         return max_flow
 
     def min_cut(self, s):
-        """Find nodes reachable from s in residual graph and compute cut edges"""
+        # Find nodes reachable from s in residual graph and compute cut edges
         visited = [False] * self.n
         self._dfs_residual(s, visited)
 
@@ -79,7 +79,7 @@ class MaxFlow:
         return min_cut_value, cut_edges
 
     def _dfs_residual(self, s, visited):
-        """DFS on residual graph to find reachable vertices"""
+        # DFS on residual graph to find reachable vertices
         stack = [s]
         visited[s] = True
         while stack:
